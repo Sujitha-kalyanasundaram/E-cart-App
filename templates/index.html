@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+
+{% block 'main' %}
+{% load static %}
+<!--start Main section-->
+<div class="row mt-3">
+    <!--col 1/filter section-->
+    <div class="col-md-4 bg-light">
+      <h5>Filter By Category</h5>
+      <hr>
+      <p><a href="/catfilter/1" class="anchor">By Mobiles</a></p>
+      <p><a href="/catfilter/2" class="anchor">By Shoes</a></p>
+      <p><a href="/catfilter/3" class="anchor">By Clothes</a></p>
+      <h5>Filter By Price Range</h5>
+      <hr>
+      <form action="/range">
+        <div class="mb-3">
+          <label for="input1" class="form-label">Min Value</label>
+          <input type="number" name="min" class="form-control" id="input1" placeholder="Enter min amount">
+        </div>
+        <div class="mb-3">
+          <label for="input2" class="form-label">Max Value</label>
+          <input type="number" name="max" class="form-control" id="input2" placeholder="Enter max amount">
+        </div>
+        <div class="mb-3">
+          <input type="submit" class="btn btn-danger" value="Submit">
+        </div>
+      </form>
+      <h5>Sort By Price</h5>
+      <hr>
+      <p><a href="/sort/0" class="anchor">Low to High</a></p>
+      <p><a href="/sort/1" class="anchor">High to Low</a></p>
+    </div>
+    <!--col 2/cards section-->
+    <div class="col-md-8">
+      <h3>Products</h3>
+      <!--Row 1-->
+      <div class="row mt-3">
+        {% for x in products %}
+        <!--cards-->
+        <div class="col-md-4">
+          <div class="card" style="width:100%;">
+            <img src="{{x.pimage.url}}" height="150px" class="card-img-top" alt="...">
+            <div class="card-body">
+              <h5 class="card-title">{{x.name}}</h5>
+              <p class="card-text">Rs.{{x.price}}</p>
+              {% if x.cat == 1 %}
+              <p class="card-text">Mobiles</p>
+              {% elif x.cat == 2 %}
+              <p class="card-text">Shoes</p>
+              {% else %}
+              <p class="card-text">Clothes</p>
+              {% endif %}
+              <a href="/pdetails/{{x.id}}" class="btn btn-danger">See details</a>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+</div>
+<!--End Main section-->
+
+{% endblock 'main' %}

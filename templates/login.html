@@ -1,0 +1,49 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <link rel="stylesheet" href="{% static 'assets/css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/bootstrap.min.css' %}">
+</head>
+<body>
+    <div class="container">
+        <div class="row mt-5">
+            <div class="col-12">
+                <a href="/home" style="text-decoration:none;">Home</a>
+            </div>
+        </div>
+        <div class="row mt-4">
+            <div class="col-md-4 shadow mt-5 p-4 mx-auto">
+                <h2 class="text-center">Login</h2>
+                {% if errmsg %}
+                    <div class="alert alert-danger">
+                        {{errmsg}}
+                    </div>
+                {% endif %}
+                <form action="/login" method="POST">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        <label for="input1" class="fom-label">Username:</label>
+                        <input type="email" name="uname" class="form-control" id="input1" placeholder="Enter username/email"> 
+                    </div>
+                    <div class="mb-3">
+                        <label for="input2" class="fom-label">Password:</label>
+                        <input type="password" name="upass" class="form-control" id="input2" placeholder="Enter password"> 
+                    </div>
+                    <div class="mb-3">
+                        <input type="submit" class="btn btn-danger" value="Login">
+                        
+                        <br>Not a registered user? <a href="/register">Register Now!!</a> 
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="{% static 'assets/js/main.js' %}"></script>
+    <script src="{% static 'assets/js/bootstrap.min.js' %}"></script>
+</body>
+</html>
